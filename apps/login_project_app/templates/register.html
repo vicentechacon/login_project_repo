@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body class="text-center">
+
+    <form class="form-signin" method='POST' action='register'>
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+
+        <label for="first_name" class="sr-only">First name</label>
+        <input name='first_name' type="text" class="form-control {% if errors.first_name %} is-invalid {% endif %} "
+            placeholder="First Name" autofocus>
+        {% if errors.first_name %}
+        <div class="invalid-feedback">{{errors.first_name}}</div>
+        {% endif %}
+
+        <label for="last_name" class="sr-only">Last name</label>
+        <input name='last_name' type="text" id="inputLastName"
+            class="form-control {% if errors.last_name %} is-invalid {% endif %}" placeholder="Last Name" autofocus>
+        {% if errors.last_name %}
+        <div class="invalid-feedback">{{errors.last_name}}</div>
+        {% endif %}
+
+        <label for="email" class="sr-only">Email adress</label>
+        <input name='email' type="email" id="inputEmail"
+            class="form-control {% if errors.email or errors.email_registered %} is-invalid {% endif %} "
+            placeholder="Email address" autofocus>
+        {% if errors.email %}
+        <div class="invalid-feedback">{{errors.email}}</div>
+        {% endif %}
+        {% if errors.email_registered %}
+        <div class="invalid-feedback">{{errors.email_registered}}</div>
+        {% endif %}
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name='password' type="password" class="form-control {% if errors.password %} is-invalid {% endif %} "
+            placeholder="Password">
+        {% if errors.password %}
+        <div class="invalid-feedback">{{errors.password}}</div>
+        {% endif %}
+        <label for="inputPassword" class="sr-only">Confirm Password</label>
+        <input name='confirm_password' type="password"
+            class="form-control {% if errors.confirmation %} is-invalid {% endif %} " placeholder="Confirm Password">
+        {% if errors.confirmation %}
+        <div class="invalid-feedback">{{errors.confirmation}}</div>
+        {% endif %}
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+        <a href="/login">Do you have an account?</a>
+    </form>
